@@ -16,7 +16,12 @@ _global_script_class_icons={
 [application]
 
 config/name="Babelito"
+run/main_scene="res://src/level/0.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+globals="*res://src/main/globals.gd"
 
 [rendering]
 
