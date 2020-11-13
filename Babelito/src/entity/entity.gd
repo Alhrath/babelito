@@ -17,7 +17,7 @@ func _physics_process(delta):
 		motion.y = maxfallspeed
 	motion = move_and_slide(motion,globals.UP)
 
-func do_jump():
+func jump():
 	motion.y = -jump_force
 
 func move_left():
