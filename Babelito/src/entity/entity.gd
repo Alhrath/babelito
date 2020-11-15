@@ -17,8 +17,6 @@ var is_from_lightning_moon = false
 var is_from_time_moon = false
 
 func _physics_process(delta):
-	
-	# GRAVITY
 	motion.y += gravity
 	if motion.y > maxfallspeed:
 		motion.y = maxfallspeed

@@ -17,7 +17,13 @@ func ai_loop():
 func _on_vitalzone_body_entered(body):
 	if(body.is_from_time_moon == false):
 		if(!hunting_table.has(body)):
-			hunting_table.insert(body.name, body)
+			hunting_table.insert(hunting_table.size(), body)
+
+
+func _on_interestzone_body_exited(body):
+	if(hunting_table.has(body)):
+		hunting_table.erase(body)
+
 
 func idle():
 	var ai_decision = randi()%3+1
@@ -33,7 +39,7 @@ func hunt_preys():
 	if(hunting_table.size() == 1):
 		hunt_prey(hunting_table[0])
 	else:
-		jump()
+		jump() # Panik!!!
 
 func hunt_prey(prey):
 	if(prey.global_position.y > global_position.y):
@@ -43,3 +49,4 @@ func hunt_prey(prey):
 			move_right()
 	else:
 		jump()
+
