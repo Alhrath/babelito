@@ -1,5 +1,8 @@
 extends "../entity.gd"
 
+func _init():
+	is_from_earth = true
+	
 func _input(event):
 	if is_on_floor () and event.is_action_pressed("ui_up"):
 		jump()

@@ -9,6 +9,13 @@ var deceleration = globals.DECELERATION
 
 var motion = Vector2()
 
+var is_from_earth = false
+var is_from_fire_moon = false
+var is_from_water_moon = false
+var is_from_earth_moon = false
+var is_from_lightning_moon = false
+var is_from_time_moon = false
+
 func _physics_process(delta):
 	
 	# GRAVITY
