@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+signal grounded_updated(is_grounded)
+
 const UP = Vector2(0,-1)
 const SLOPE_STOP = 64
 const DROP_THRU_BIT = 1 # collision variable for dropping through platform
@@ -21,7 +23,7 @@ onready var raycasts = $Raycasts
 onready var anim_player = $Body/PlayerRig/AnimationPlayer
 
 func _ready():
-	gravity = 2* max_jump_height / pow(jump_duration, 2)
+	gravity = 2 * max_jump_height / pow(jump_duration, 2)
 	max_jump_velocity = -sqrt(2 * gravity * max_jump_height)
 	min_jump_velocity = -sqrt(2 * gravity * min_jump_height)
 	
@@ -35,7 +37,10 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity, UP, SLOPE_STOP)
 	
 	is_grounded = !is_jumping && get_collision_mask_bit(DROP_THRU_BIT) && _check_is_grounded()
-	
+	var was_grounded = is_grounded
+	if was_grounded == null || is_grounded != was_grounded:
+		emit_signal("grounded_updated", is_grounded)
+		
 	_assign_animation()
 
 func _input(event): 
