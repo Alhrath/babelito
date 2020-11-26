@@ -593,23 +593,20 @@ tracks/14/keys = {
 
 [node name="Torso" type="Sprite" parent="."]
 texture = ExtResource( 1 )
-offset = Vector2( 0, 1 )
 vframes = 2
 hframes = 2
 
 [node name="Head" type="Sprite" parent="Torso"]
 position = Vector2( 3.67081, -23.6934 )
-rotation = 0.0132437
 texture = ExtResource( 1 )
-offset = Vector2( 0, 1 )
 flip_h = true
 vframes = 2
 hframes = 2
 frame = 1
 
 [node name="LeftArm" type="Sprite" parent="Torso"]
-position = Vector2( 8.05876, 4.32164 )
-rotation = -0.0487735
+position = Vector2( 16.5186, 1.5017 )
+rotation = -0.432842
 scale = Vector2( 0.7, 0.7 )
 z_index = -1
 texture = ExtResource( 1 )
@@ -618,8 +615,7 @@ hframes = 2
 frame = 3
 
 [node name="RightArm" type="Sprite" parent="Torso"]
-position = Vector2( 1.25938, 6.92335 )
-rotation = -0.331093
+position = Vector2( -4.00452, 7.67533 )
 scale = Vector2( 0.7, 0.7 )
 z_index = 1
 texture = ExtResource( 1 )
@@ -628,8 +624,7 @@ hframes = 2
 frame = 3
 
 [node name="LeftLeg" type="Sprite" parent="Torso"]
-position = Vector2( 5.32558, 25.3547 )
-rotation = -0.0988154
+position = Vector2( 11.0124, 24.0271 )
 scale = Vector2( 0.7, 0.7 )
 z_index = -1
 texture = ExtResource( 1 )
@@ -639,8 +634,7 @@ hframes = 2
 frame = 2
 
 [node name="RightLeg" type="Sprite" parent="Torso"]
-position = Vector2( -17.6274, 21.3636 )
-rotation = 0.515034
+position = Vector2( -12.3498, 26.9094 )
 scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 1 )
 vframes = 2

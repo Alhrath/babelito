@@ -3,7 +3,7 @@ extends KinematicBody2D
 signal grounded_updated(is_grounded)
 
 const UP = Vector2(0,-1)
-const SLOPE_STOP = 64
+const SLOPE_STOP_THRESHOLD = 64
 const DROP_THRU_BIT = 1 # collision variable for dropping through platform
 
 var velocity = Vector2()
@@ -12,7 +12,7 @@ var gravity #= 1200
 var max_jump_velocity #var jump_velocity = -720
 var min_jump_velocity 
 var is_jumping = false #useful to create platform drop through
-
+var move_direction
 var max_jump_height = 3.25 * Globals.UNIT_SIZE
 var min_jump_height = 0.05 * Globals.UNIT_SIZE
 var jump_duration = 0.45
@@ -34,9 +34,15 @@ func _physics_process(delta):
 	if is_jumping && velocity.y >= 0:
 		is_jumping = false
 	
-	velocity = move_and_slide(velocity, UP, SLOPE_STOP)
+	var snap = Vector2.DOWN * 32 if !is_jumping else Vector2.ZERO
 	
-	is_grounded = !is_jumping && get_collision_mask_bit(DROP_THRU_BIT) && _check_is_grounded()
+	if move_direction == 0 && abs(velocity.x) < SLOPE_STOP_THRESHOLD:
+		velocity.x = 0
+	var stop_on_slope = true if get_floor_velocity().x == 0 else false
+	
+	velocity = move_and_slide_with_snap(velocity, snap, UP, stop_on_slope)
+	
+	is_grounded = is_on_floor()#!is_jumping && get_collision_mask_bit(DROP_THRU_BIT) && _check_is_grounded()
 	var was_grounded = is_grounded
 	if was_grounded == null || is_grounded != was_grounded:
 		emit_signal("grounded_updated", is_grounded)
@@ -55,7 +61,7 @@ func _input(event):
 		velocity.y = min_jump_velocity
 		
 func _get_input():
-	var move_direction = -int(Input.is_action_pressed("move_left")) + int(Input.is_action_pressed("move_right"))
+	move_direction = -int(Input.is_action_pressed("move_left")) + int(Input.is_action_pressed("move_right"))
 	velocity.x = lerp(velocity.x, move_speed * move_direction, _get_h_weight())
 	if move_direction != 0:
 		$Body.scale.x = move_direction
@@ -73,7 +79,9 @@ func _check_is_grounded(raycasts = self.raycasts):
 
 func _assign_animation():
 	var anim = "idle"
-	
+	if is_grounded && velocity.x == 0:
+		anim = "idle"
+		
 	if !is_grounded:
 		anim= "jump"
 		
