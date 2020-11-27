@@ -27,3 +27,7 @@ func _check_facing():
 func _on_Player_grounded_updated(is_grounded):
 	drag_margin_v_enabled = !is_grounded
 
+
+
+func _on_Area2D_body_exited(body):
+	pass # Replace with function body.
