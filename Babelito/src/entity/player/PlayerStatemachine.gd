@@ -16,21 +16,15 @@ func _state_logic(delta):
 func _input(event): 
 	if [states.idle, states.run].has(state):
 		if event.is_action_pressed("jump"): #&& parent.is_on_floor():  #single jump 
-			parent.velocity.y = parent.max_jump_velocity
-			parent.is_jumping = true
-		if Input.is_action_pressed("down"):
+		
+			if Input.is_action_pressed("down"):
 				if parent._check_is_grounded(parent.drop_thru_raycasts):
 					parent.set_collision_mask_bit(parent.DROP_THRU_BIT, false)
+					
+			else:
+				parent.velocity.y = parent.max_jump_velocity
+				parent.is_jumping = true
 
-
-#			if Input.is_action_pressed("down"):
-#				if parent._check_is_grounded(parent.drop_thru_raycasts):
-#					parent.set_collision_mask_bit(parent.DROP_THRU_BIT, false)
-#
-#			else:
-#				parent.velocity.y = parent.max_jump_velocity
-#				parent.is_jumping = true
-#
 	if state == states.jump:
 		if event.is_action_released("jump") && parent.velocity.y < parent.min_jump_velocity:
 			parent.velocity.y = parent.min_jump_velocity

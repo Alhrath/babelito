@@ -10,7 +10,6 @@ extents = Vector2( 33.0888, 7.5 )
 script = ExtResource( 2 )
 
 [node name="Platform" type="KinematicBody2D" parent="."]
-collision_layer = 2
 motion/sync_to_physics = true
 
 [node name="Sprite" type="Sprite" parent="Platform"]

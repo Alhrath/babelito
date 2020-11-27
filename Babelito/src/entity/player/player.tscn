@@ -5,11 +5,11 @@
 [ext_resource path="res://src/entity/player/Camera2D.gd" type="Script" id=3]
 [ext_resource path="res://src/entity/player/PlayerStatemachine.gd" type="Script" id=4]
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 13.3443, 31.0938 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 15.4533, 4.67267 )
+extents = Vector2( 13.0818, 4.67267 )
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 0
@@ -43,19 +43,16 @@ position = Vector2( 0, 0.396851 )
 [node name="PhysicsShape" type="CollisionShape2D" parent="."]
 light_mask = 0
 position = Vector2( -0.302193, -8.79821 )
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="Raycasts" type="Node2D" parent="."]
 light_mask = 3
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="RayCast2D" type="RayCast2D" parent="Raycasts"]
-position = Vector2( 13, 28 )
+position = Vector2( 12.6031, 22.3449 )
 enabled = true
 cast_to = Vector2( 0, 16 )
 collision_mask = 3
@@ -64,7 +61,7 @@ __meta__ = {
 }
 
 [node name="RayCast2D2" type="RayCast2D" parent="Raycasts"]
-position = Vector2( 0, 28 )
+position = Vector2( 0, 22.4441 )
 enabled = true
 cast_to = Vector2( 0, 16 )
 collision_mask = 3
@@ -73,7 +70,7 @@ __meta__ = {
 }
 
 [node name="RayCast2D3" type="RayCast2D" parent="Raycasts"]
-position = Vector2( -13, 28 )
+position = Vector2( -12.9008, 22.3449 )
 enabled = true
 cast_to = Vector2( 0, 16 )
 collision_mask = 3
@@ -84,12 +81,9 @@ __meta__ = {
 [node name="DropThruRaycasts" type="Node2D" parent="."]
 light_mask = 3
 script = ExtResource( 4 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="RayCast2D" type="RayCast2D" parent="DropThruRaycasts"]
-position = Vector2( 13, 28 )
+position = Vector2( 12.5955, 22.3268 )
 enabled = true
 cast_to = Vector2( 0, 16 )
 collision_mask = 2
@@ -98,7 +92,7 @@ __meta__ = {
 }
 
 [node name="RayCast2D2" type="RayCast2D" parent="DropThruRaycasts"]
-position = Vector2( 0, 28 )
+position = Vector2( 0, 22.3659 )
 enabled = true
 cast_to = Vector2( 0, 16 )
 collision_mask = 2
@@ -107,7 +101,7 @@ __meta__ = {
 }
 
 [node name="RayCast2D3" type="RayCast2D" parent="DropThruRaycasts"]
-position = Vector2( -13, 28 )
+position = Vector2( -12.8926, 22.3662 )
 enabled = true
 cast_to = Vector2( 0, 16 )
 collision_mask = 2
@@ -122,10 +116,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( -0.0393724, 23.2166 )
+position = Vector2( 0, 17.462 )
 shape = SubResource( 2 )
-__meta__ = {
-"_edit_lock_": true
-}
 [connection signal="grounded_updated" from="." to="Camera2D" method="_on_Player_grounded_updated"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
