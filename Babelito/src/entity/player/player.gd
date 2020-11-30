@@ -2,7 +2,9 @@ extends KinematicBody2D
 
 signal grounded_updated(is_grounded)
 
-const UP = Vector2(0,-1)
+const GodotProjectile_PS = preload("res://src/entity/weapons/GodotProjectile.tscn")
+
+
 const SLOPE_STOP_THRESHOLD = 64
 const DROP_THRU_BIT = 1 # collision variable for dropping through platform
 
@@ -16,26 +18,23 @@ var max_jump_height = 3.25 * Globals.UNIT_SIZE
 var min_jump_height = 0.05 * Globals.UNIT_SIZE
 var jump_duration = 0.45
 
+var held_item = null
+
 var is_jumping = false #useful to create platform drop through
 var is_grounded = false#to permit a check_ground method associated with raycasts
-var is_wall_sliding = false
-var is_dodging = false
-var is_dead = false
-var is_moonwalking = true
 
 onready var drop_thru_raycasts = $DropThruRaycasts
 onready var raycasts = $Raycasts
 onready var anim_player = $Body/PlayerRig/AnimationPlayer
+onready var held_item_position = $Body/PlayerRig/Torso/RightArm/HeldItemPosition
+onready var hitbox = $Hitbox
 
 func _ready():
-	gravity = 2 * max_jump_height / pow(jump_duration, 2)
-	max_jump_velocity = -sqrt(2 * gravity * max_jump_height)
-	min_jump_velocity = -sqrt(2 * gravity * min_jump_height)
-
+		
 	Globals.player = self
 
 func _apply_gravity(delta):
-	velocity.y += gravity * delta
+	velocity.y += Globals.gravity * delta
 
 func _apply_movement():
 
@@ -48,10 +47,11 @@ func _apply_movement():
 		velocity.x = 0
 	var stop_on_slope = true if get_floor_velocity().x == 0 else false
 	
-	velocity = move_and_slide_with_snap(velocity, snap, UP, stop_on_slope)
+	velocity = move_and_slide_with_snap(velocity, snap, Globals.UP, stop_on_slope)
 	
-	is_grounded = is_on_floor()  && get_collision_mask_bit(DROP_THRU_BIT) && _check_is_grounded() #!is_jumping
 	var was_grounded = is_grounded
+	is_grounded = is_on_floor()  && get_collision_mask_bit(DROP_THRU_BIT) && _check_is_grounded() #!is_jumping
+	
 	if was_grounded == null || is_grounded != was_grounded:
 		emit_signal("grounded_updated", is_grounded)
 	
@@ -60,12 +60,20 @@ func _handle_move_input():
 	velocity.x = lerp(velocity.x, move_speed * move_direction, _get_h_weight())
 	if move_direction != 0:
 		$Body.scale.x = move_direction
+	################################
+	if Input.is_action_pressed("move_left") or velocity.x < 0:
+		Globals.playerfacing = -1
+#Globals.facing = -1
+	elif Input.is_action_pressed("move_right") or velocity.x > 0:
+		Globals.playerfacing = 1
+#Globals.facing = 1
+################################
 	
 func _get_h_weight():
 	return 0.2 if is_grounded else 0.1
 
 
-func _check_is_grounded(raycasts = self.raycasts):
+func _check_is_grounded(raycasts= self.raycasts):
 	for raycast in raycasts.get_children():
 		if raycast.is_colliding():
 			return true	
@@ -74,3 +82,14 @@ func _check_is_grounded(raycasts = self.raycasts):
 
 func _on_Area2D_body_exited(body):
 	set_collision_mask_bit(DROP_THRU_BIT, true)
+
+func spawn_godot():
+	if held_item == null:
+		held_item = GodotProjectile_PS.instance()
+		held_item_position.add_child(held_item)
+		
+
+func _throw_held_item():
+	held_item.launch(Globals.playerfacing)
+	#held_item.launch(Globals.facing)
+	held_item = null
