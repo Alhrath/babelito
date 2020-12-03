@@ -1,10 +1,14 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/entity/player/craby.png" type="Texture" id=1]
+[ext_resource path="res://src/entity/player/playerdamage.tres" type="Animation" id=2]
 [ext_resource path="res://src/entity/player/PlayerRig.gd" type="Script" id=3]
+[ext_resource path="res://src/entity/enemy/SleepingBall/SleepingBallFlash.tres" type="Animation" id=4]
+[ext_resource path="res://src/entity/enemy/SleepingBall/sleepingballrest.tres" type="Animation" id=5]
 
-[sub_resource type="Animation" id=1]
-resource_name = "fall"
+[sub_resource type="GDScript" id=1]
+
+[sub_resource type="Animation" id=2]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Torso:position")
@@ -174,8 +178,20 @@ tracks/13/keys = {
 "update": 0,
 "values": [ 2.0 ]
 }
+tracks/14/type = "value"
+tracks/14/path = NodePath("Torso/Head:scale")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=3]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Torso:frame")
@@ -417,8 +433,20 @@ tracks/19/keys = {
 "update": 1,
 "values": [ false, false ]
 }
+tracks/20/type = "value"
+tracks/20/path = NodePath("Torso/Head:scale")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=4]
 resource_name = "irina"
 loop = true
 tracks/0/type = "value"
@@ -626,7 +654,7 @@ tracks/16/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=5]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Torso/RightArm:position")
 tracks/0/interp = 1
@@ -795,8 +823,20 @@ tracks/13/keys = {
 "update": 0,
 "values": [ 3.0 ]
 }
+tracks/14/type = "value"
+tracks/14/path = NodePath("Torso/Head:scale")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=6]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Torso/RightArm:position")
@@ -978,9 +1018,20 @@ tracks/14/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/15/type = "value"
+tracks/15/path = NodePath("Torso/Head:scale")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
 
-[sub_resource type="Animation" id=5]
-resource_name = "throw"
+[sub_resource type="Animation" id=7]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Torso/Head:scale")
 tracks/0/interp = 1
@@ -988,10 +1039,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.2, 0.5, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 0.95, 0.95 ), Vector2( 1, 1 ) ]
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 0.95, 0.95 ), Vector2( 1, 1 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Torso/RightLeg:position")
@@ -1175,6 +1226,18 @@ tracks/15/keys = {
 "update": 0,
 "values": [ 3.0 ]
 }
+tracks/16/type = "value"
+tracks/16/path = NodePath("Torso/RightArm/HeldItemPosition:position")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 11.2638, 0.695968 ), Vector2( 32.3769, 25.3765 ) ]
+}
 
 [node name="PlayerRig" type="Node2D"]
 script = ExtResource( 3 )
@@ -1185,9 +1248,8 @@ vframes = 2
 hframes = 2
 
 [node name="Head" type="Sprite" parent="Torso"]
-position = Vector2( 9.06656, -25.5154 )
-rotation = 0.208914
-scale = Vector2( 0.983333, 0.983333 )
+position = Vector2( 5.98328, -25.3752 )
+rotation = 0.116388
 texture = ExtResource( 1 )
 flip_h = true
 vframes = 2
@@ -1195,8 +1257,8 @@ hframes = 2
 frame = 1
 
 [node name="LeftArm" type="Sprite" parent="Torso"]
-position = Vector2( 6.70814, 5.6361 )
-rotation = 0.160545
+position = Vector2( 12.5243, 4.44483 )
+rotation = -0.342552
 scale = Vector2( 0.7, 0.7 )
 z_index = -1
 texture = ExtResource( 1 )
@@ -1205,8 +1267,8 @@ hframes = 2
 frame = 3
 
 [node name="RightArm" type="Sprite" parent="Torso"]
-position = Vector2( 9.07539, -16.2222 )
-rotation = -1.98599
+position = Vector2( 10.9214, -5.98924 )
+rotation = -1.22238
 scale = Vector2( 0.7, 0.7 )
 z_index = 1
 texture = ExtResource( 1 )
@@ -1216,7 +1278,8 @@ frame = 3
 
 [node name="HeldItemPosition" type="Position2D" parent="Torso/RightArm"]
 show_behind_parent = true
-position = Vector2( 10.2638, 0.329469 )
+position = Vector2( 11.2638, 0.695968 )
+script = SubResource( 1 )
 
 [node name="LeftLeg" type="Sprite" parent="Torso"]
 position = Vector2( 11.0124, 24.0271 )
@@ -1238,9 +1301,14 @@ frame = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 3.0
-anims/fall = SubResource( 1 )
-anims/idle = SubResource( 2 )
-anims/irina = SubResource( 6 )
-anims/jump = SubResource( 3 )
-anims/run = SubResource( 4 )
-anims/throw = SubResource( 5 )
+anims/fall = SubResource( 2 )
+anims/idle = SubResource( 3 )
+anims/irina = SubResource( 4 )
+anims/jump = SubResource( 5 )
+anims/run = SubResource( 6 )
+anims/throw = SubResource( 7 )
+
+[node name="EffectsAnimation" type="AnimationPlayer" parent="."]
+anims/damage = ExtResource( 2 )
+anims/flash = ExtResource( 4 )
+anims/rest = ExtResource( 5 )

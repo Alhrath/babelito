@@ -4,17 +4,19 @@
 [ext_resource path="res://src/tile/cute/cute.tres" type="TileSet" id=2]
 [ext_resource path="res://src/tile/cute/Tiledroptest.tres" type="TileSet" id=3]
 [ext_resource path="res://src/tile/nature/MovingPlatform.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/entity/player/enemytest2.png" type="Texture" id=5]
+[ext_resource path="res://src/entity/enemy/SleepingBall/SleepingBall.tscn" type="PackedScene" id=5]
 
 [node name="Level 0" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 420.166, -739.791 )
 
 [node name="TileMap" type="TileMap" parent="."]
 z_index = -2
 tile_set = ExtResource( 3 )
-collision_layer = 26
-collision_mask = 17
+collision_layer = 10
 format = 1
-tile_data = PoolIntArray( -655366, 0, 0, -655365, 0, 0, -655362, 0, 0, -655361, 0, 0, -720896, 0, 0, -458758, 0, 0, -458757, 0, 0, -458756, 0, 0, -458755, 0, 0, -458754, 0, 0, -458753, 0, 0, -524288, 0, 0, 131089, 0, 0, 131090, 0, 0, 131091, 0, 0 )
+tile_data = PoolIntArray( -1048569, 0, 0, -983032, 0, 0, -917496, 0, 0, -851960, 0, 0, -786425, 0, 0, -655366, 0, 0, -655365, 0, 0, -655362, 0, 0, -655361, 0, 0, -720896, 0, 0, -720890, 0, 0, -720886, 0, 0, -589840, 0, 0, -589839, 0, 0, -589838, 0, 0, -589837, 0, 0, -589836, 0, 0, -589835, 0, 0, -589834, 0, 0, -589833, 0, 0, -589832, 0, 0, -655357, 0, 0, -655356, 0, 0, -655355, 0, 0, -458758, 0, 0, -458757, 0, 0, -458756, 0, 0, -458755, 0, 0, -458754, 0, 0, -458753, 0, 0, -524288, 0, 0, 131089, 0, 0, 131090, 0, 0, 131091, 0, 0 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -25,23 +27,16 @@ tile_set = ExtResource( 2 )
 collision_layer = 9
 collision_mask = 0
 format = 1
-tile_data = PoolIntArray( -262145, 2, 0, -327680, 3, 0, -327679, 3, 0, -327678, 4, 0, -262139, 2, 0, -262138, 3, 0, -262137, 4, 0, -131084, 3, 0, -65548, 3, 0, -65546, 3, 0, -12, 3, 0, -10, 3, 0, -8, 3, 0, -65532, 2, 0, -65531, 3, 0, -65530, 4, 0, 65524, 3, 0, 65526, 3, 0, 65528, 3, 0, 65531, 3, 0, 131060, 3, 0, 131061, 3, 0, 131062, 3, 0, 131063, 3, 0, 131064, 3, 0, 131065, 3, 0, 131066, 3, 0, 131067, 3, 0, 131068, 3, 0, 131069, 3, 0, 131070, 3, 0, 131071, 3, 0, 65536, 3, 0, 65537, 3, 0, 65538, 3, 0, 65539, 4, 0, 393233, 2, 0, 393234, 3, 0, 393235, 3, 0, 393236, 3, 0, 393237, 4, 0 )
+tile_data = PoolIntArray( -983031, 3, 0, -917495, 3, 0, -851959, 3, 0, -786424, 3, 0, -786423, 3, 0, -720889, 3, 0, -720888, 3, 0, -655354, 3, 0, -655353, 3, 0, -262145, 2, 0, -327680, 3, 0, -327679, 3, 0, -327678, 4, 0, -262139, 2, 0, -262138, 3, 0, -262137, 4, 0, -131084, 3, 0, -65548, 3, 0, -65546, 3, 0, -12, 3, 0, -10, 3, 0, -8, 3, 0, -65532, 2, 0, -65531, 3, 0, -65530, 4, 0, 65524, 3, 0, 65526, 3, 0, 65528, 3, 0, 65531, 3, 0, 131060, 3, 0, 131061, 3, 0, 131062, 3, 0, 131063, 3, 0, 131064, 3, 0, 131065, 3, 0, 131066, 3, 0, 131067, 3, 0, 131068, 3, 0, 131069, 3, 0, 131070, 3, 0, 131071, 3, 0, 65536, 3, 0, 65537, 3, 0, 65538, 3, 0, 65539, 4, 0, 393233, 2, 0, 393234, 3, 0, 393235, 3, 0, 393236, 3, 0, 393237, 4, 0 )
 __meta__ = {
 "_edit_lock_": true
 }
-
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( -85.8994, -1061.14 )
-collision_layer = 2147483648
 
 [node name="MovingPlatform" parent="." instance=ExtResource( 4 )]
 position = Vector2( 473.011, 29.9545 )
 z_index = -2
 move_to = Vector2( 640, 64 )
 
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 1408.34, 599.195 )
-scale = Vector2( 1.44144, 1 )
-texture = ExtResource( 5 )
-vframes = 23
-frame = 8
+[node name="SleepingBall" parent="." instance=ExtResource( 5 )]
+position = Vector2( 51.473, -767.337 )
+max_health = 100.0

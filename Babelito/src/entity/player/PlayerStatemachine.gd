@@ -6,6 +6,9 @@ func _ready():
 	add_state("jump")
 	add_state("fall")
 	add_state("throw_godot")
+	################
+	add_state("dead")
+	###############3
 	call_deferred("set_state", states.idle) #defining "idle" as default
 
 func _state_logic(delta):

@@ -4,7 +4,7 @@ const UNIT_SIZE = 64
 const UP = Vector2(0, -1)
 var player
 ##############
-export var playerfacing = 0
+export var playerfacing = 1
 #############3
 export var facing = 0
 #from player:

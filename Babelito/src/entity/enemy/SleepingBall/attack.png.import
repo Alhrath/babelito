@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/enemytest_attack.png-29bc5f2d4f4544b990f48cb0ee876f94.stex"
+path="res://.import/attack.png-e410173b30ab72f13b368e9d7430ae75.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/entity/player/enemytest_attack.png"
-dest_files=[ "res://.import/enemytest_attack.png-29bc5f2d4f4544b990f48cb0ee876f94.stex" ]
+source_file="res://src/entity/enemy/SleepingBall/attack.png"
+dest_files=[ "res://.import/attack.png-e410173b30ab72f13b368e9d7430ae75.stex" ]
 
 [params]
 

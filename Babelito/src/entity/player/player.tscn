@@ -13,7 +13,7 @@ extents = Vector2( 13.3443, 31.0938 )
 extents = Vector2( 13.0818, 4.67267 )
 
 [sub_resource type="CapsuleShape2D" id=3]
-radius = 14.5275
+radius = 16.4661
 height = 29.7502
 
 [node name="Player" type="KinematicBody2D"]
@@ -23,8 +23,10 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
+max_health = 200.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
+visible = false
 position = Vector2( 0, -48 )
 current = true
 drag_margin_h_enabled = true
@@ -38,6 +40,9 @@ editor_draw_drag_margin = true
 script = ExtResource( 3 )
 
 [node name="ShiftTween" type="Tween" parent="Camera2D"]
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 4 )
 
 [node name="Body" type="Node2D" parent="."]
 __meta__ = {
@@ -87,7 +92,6 @@ __meta__ = {
 
 [node name="DropThruRaycasts" type="Node2D" parent="."]
 light_mask = 3
-script = ExtResource( 4 )
 
 [node name="RayCast2D" type="RayCast2D" parent="DropThruRaycasts"]
 position = Vector2( 12.5955, 22.3268 )
@@ -127,13 +131,21 @@ position = Vector2( 0, 17.462 )
 shape = SubResource( 2 )
 
 [node name="Hitbox" type="Area2D" parent="."]
-collision_layer = 32
-collision_mask = 2147483648
+collision_layer = 0
+collision_mask = 2147483680
 script = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2( -0.297302, -10.1083 )
+position = Vector2( 1.10577, -11.2308 )
 shape = SubResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="InvulnerabilityTimer" type="Timer" parent="."]
+wait_time = 0.8
+one_shot = true
 [connection signal="grounded_updated" from="." to="Camera2D" method="_on_Player_grounded_updated"]
 [connection signal="throw_item" from="Body/PlayerRig" to="." method="_throw_held_item"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
+[connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_InvulnerabilityTimer_timeout"]

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/enemytest2.png-1349fc9a657c3a3c76c2e1fbe6aff15c.stex"
+path="res://.import/boule-walkDLUR.png-63a792500681a7a42bb9099b8cecd252.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/entity/player/enemytest2.png"
-dest_files=[ "res://.import/enemytest2.png-1349fc9a657c3a3c76c2e1fbe6aff15c.stex" ]
+source_file="res://src/entity/enemy/SleepingBall/boule-walkDLUR.png"
+dest_files=[ "res://.import/boule-walkDLUR.png-63a792500681a7a42bb9099b8cecd252.stex" ]
 
 [params]
 

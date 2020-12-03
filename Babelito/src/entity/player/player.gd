@@ -2,11 +2,18 @@ extends KinematicBody2D
 
 signal grounded_updated(is_grounded)
 
+signal health_updated(health)
+signal killed()
+
 const GodotProjectile_PS = preload("res://src/entity/weapons/GodotProjectile.tscn")
 
 
 const SLOPE_STOP_THRESHOLD = 64
 const DROP_THRU_BIT = 1 # collision variable for dropping through platform
+
+
+export (float) var max_health = 100
+onready var health = max_health setget _set_health
 
 var velocity = Vector2()
 var move_speed = 5 * Globals.UNIT_SIZE
@@ -28,6 +35,9 @@ onready var raycasts = $Raycasts
 onready var anim_player = $Body/PlayerRig/AnimationPlayer
 onready var held_item_position = $Body/PlayerRig/Torso/RightArm/HeldItemPosition
 onready var hitbox = $Hitbox
+
+onready var invulnerability_timer = $InvulnerabilityTimer
+onready var effects_animation = $Body/PlayerRig/EffectsAnimation
 
 func _ready():
 		
@@ -80,9 +90,6 @@ func _check_is_grounded(raycasts= self.raycasts):
 	
 	return false
 
-func _on_Area2D_body_exited(body):
-	set_collision_mask_bit(DROP_THRU_BIT, true)
-
 func spawn_godot():
 	if held_item == null:
 		held_item = GodotProjectile_PS.instance()
@@ -93,3 +100,33 @@ func _throw_held_item():
 	held_item.launch(Globals.playerfacing)
 	#held_item.launch(Globals.facing)
 	held_item = null
+
+func _on_Area2D_body_exited(body):
+	set_collision_mask_bit(DROP_THRU_BIT, true)
+
+
+
+
+func damage(damage_amount):
+	if invulnerability_timer.is_stopped():
+		invulnerability_timer.start()
+		_set_health(health - damage_amount)
+		effects_animation.play("damage")
+		effects_animation.queue("flash")
+	
+func kill():
+	print("KILLED")
+	
+func _set_health(value):
+	var prev_health = health
+	health = clamp(value, 0, max_health)
+	if health != prev_health:
+		emit_signal("health_updated", health)
+		if health == 0:
+			kill()
+			emit_signal("killed")
+
+func _on_InvulnerabilityTimer_timeout():
+	effects_animation.play("rest")
+
+
