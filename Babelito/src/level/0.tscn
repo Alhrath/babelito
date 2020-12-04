@@ -39,4 +39,6 @@ move_to = Vector2( 640, 64 )
 
 [node name="SleepingBall" parent="." instance=ExtResource( 5 )]
 position = Vector2( 51.473, -767.337 )
-max_health = 100.0
+
+[node name="SleepingBall2" parent="." instance=ExtResource( 5 )]
+position = Vector2( -63.527, -756.337 )

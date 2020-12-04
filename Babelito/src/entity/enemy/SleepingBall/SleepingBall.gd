@@ -2,6 +2,9 @@ extends KinematicBody2D
 
 const SLOPE_STOP_THRESHOLD = 64
 
+signal health_updated(health)
+signal killed()
+
 onready var anim_player = $Body/SleepingBallRig/AnimationPlayer
 onready var hitbox = $Hitbox
 onready var effects_animation = $Body/SleepingBallRig/EffectsAnimation
@@ -38,6 +41,7 @@ func _apply_movement():
 
 
 func damage(damage_amount):
+	
 	if invulnerability_timer.is_stopped():
 		invulnerability_timer.start()
 		_set_health(health - damage_amount)
