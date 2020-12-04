@@ -30,7 +30,7 @@ func _on_assign_color(health):
 		health_over.tint_progress = healthy_color
 	
 	
-func _on_max_health_updated(max_health):
+func _on_SleepingBall_max_health_updated(max_health):
 	health_over.max_value = max_health
 	health_under.max_value = max_health
 	

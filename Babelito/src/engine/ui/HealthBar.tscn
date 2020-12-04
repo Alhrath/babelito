@@ -32,7 +32,7 @@ margin_right = 600.0
 margin_bottom = 200.0
 rect_scale = Vector2( 0.2, 0.2 )
 texture_progress = ExtResource( 2 )
-tint_progress = Color( 1, 0, 0, 0.309804 )
+tint_progress = Color( 1, 0, 0, 0.380392 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
