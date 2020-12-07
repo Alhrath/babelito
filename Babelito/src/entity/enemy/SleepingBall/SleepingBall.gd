@@ -7,14 +7,7 @@ signal grounded_updated(is_grounded)
 signal killed()
 ############
 
-<<<<<<< HEAD
 onready var anim_sb = $Body/SleepingBallRig/AnimationPlayer
-=======
-signal health_updated(health)
-signal killed()
-
-onready var anim_player = $Body/SleepingBallRig/AnimationPlayer
->>>>>>> Slipi
 onready var hitbox = $Hitbox
 onready var effects_animation = $Body/SleepingBallRig/EffectsAnimation
 onready var invulnerability_timer = $InvulnerabilityTimer
@@ -50,7 +43,6 @@ func _apply_movement():
 
 
 func damage(damage_amount):
-	
 	if invulnerability_timer.is_stopped():
 		invulnerability_timer.start()
 		_set_health(health - damage_amount)

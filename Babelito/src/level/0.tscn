@@ -38,11 +38,4 @@ z_index = -2
 move_to = Vector2( 640, 64 )
 
 [node name="SleepingBall" parent="." instance=ExtResource( 5 )]
-<<<<<<< HEAD
 position = Vector2( 46.0908, -730.796 )
-=======
-position = Vector2( 51.473, -767.337 )
-
-[node name="SleepingBall2" parent="." instance=ExtResource( 5 )]
-position = Vector2( -63.527, -756.337 )
->>>>>>> Slipi
