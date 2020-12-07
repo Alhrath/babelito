@@ -1,8 +1,13 @@
 extends KinematicBody2D
 
 const SLOPE_STOP_THRESHOLD = 64
+signal health_updated(health)
+############
+signal grounded_updated(is_grounded)
+signal killed()
+############
 
-onready var anim_player = $Body/SleepingBallRig/AnimationPlayer
+onready var anim_sb = $Body/SleepingBallRig/AnimationPlayer
 onready var hitbox = $Hitbox
 onready var effects_animation = $Body/SleepingBallRig/EffectsAnimation
 onready var invulnerability_timer = $InvulnerabilityTimer
@@ -10,7 +15,7 @@ onready var invulnerability_timer = $InvulnerabilityTimer
 export (float) var max_health = 100
 onready var health = max_health setget _set_health
 
-var move_speed = 5 * Globals.UNIT_SIZE
+var move_speed = 3 * Globals.UNIT_SIZE
 var velocity = Vector2()
 var move_direction
 
@@ -59,4 +64,29 @@ func _set_health(value):
 
 func _on_InvulnerabilityTimer_timeout():
 	effects_animation.play("sleepingballrest")
+###############
+func _should_turn():
+	pass
+func _should_chase():
+	pass
+func _should_sleep():
+	pass
+func turn():
+	pass
+func _chase_player():
+	move_local_x(get_node("../Player").position, move_speed)
+func _stop():
+	pass
+func _apply_velocity():
+	pass
+#	move_direction = -(Vector2(move_speed,0)) + (Vector2(-move_speed,0))
+#	velocity.x = lerp(velocity.x, move_speed * move_direction, _get_h_weight())
+#	if move_direction != 0:
+#		$Body.scale.x = move_direction
+func _should_attack():
+	pass
+func attack():
+	pass
+func _get_h_weight():
+	return 0.2 if is_grounded else 0.1
 

@@ -9,7 +9,7 @@
 [node name="Level 0" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 420.166, -739.791 )
+position = Vector2( 427.855, -742.809 )
 
 [node name="TileMap" type="TileMap" parent="."]
 z_index = -2
@@ -38,5 +38,4 @@ z_index = -2
 move_to = Vector2( 640, 64 )
 
 [node name="SleepingBall" parent="." instance=ExtResource( 5 )]
-position = Vector2( 51.473, -767.337 )
-max_health = 100.0
+position = Vector2( 46.0908, -730.796 )

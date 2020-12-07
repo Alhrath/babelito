@@ -1,4 +1,4 @@
-extends StateMachine
+extends "res://src/engine/singleton/StateMachine.gd"
 
 
 func _ready():
@@ -13,12 +13,12 @@ func _state_logic(delta):
 	
 	if state != states.attack && parent._should_turn():
 		parent.turn()
-		
+
 	if state == states.chase:
 		parent._chase_player()
 	else:
 		parent._stop()
-	
+
 	parent._apply_velocity()
 	
 func _get_transition(delta):
@@ -40,14 +40,21 @@ func _get_transition(delta):
 	return null
 
 func _enter_state(new_state, old_state):
+	parent.get_node("StateLabel").text = states.keys()[new_state].capitalize()
 	match new_state:
 		states.sleep:
-			parent.animation_player.play("rest")
+			parent.anim_sb.play("rest")
 		states.chase:
-			parent.animation_player.play("chase")
+			parent.anim_sb.play("chase")
 		states.attack:
-			parent.animation_player.play("attack")
+			parent.anim_sb.play("attack")
 			parent.attack()
 
 func _exit_state(old_state, new_state):
 	pass
+##########################################
+func _on_DetectionArea_area_entered(area):
+	parent._physics_process(true) # Replace with function body.
+
+func _on_DetectionArea_area_exited(area):
+	parent._physics_process(false)

@@ -39,8 +39,9 @@ onready var hitbox = $Hitbox
 onready var invulnerability_timer = $InvulnerabilityTimer
 onready var effects_animation = $Body/PlayerRig/EffectsAnimation
 
+
 func _ready():
-		
+	
 	Globals.player = self
 
 func _apply_gravity(delta):
@@ -111,8 +112,8 @@ func damage(damage_amount):
 	if invulnerability_timer.is_stopped():
 		invulnerability_timer.start()
 		_set_health(health - damage_amount)
-		effects_animation.play("damage")
-		effects_animation.queue("flash")
+		effects_animation.play("playerdamage")
+		effects_animation.queue("playerflash")
 	
 func kill():
 	print("KILLED")
@@ -124,9 +125,9 @@ func _set_health(value):
 		emit_signal("health_updated", health)
 		if health == 0:
 			kill()
-			emit_signal("killed")
+			#emit_signal("killed")
 
 func _on_InvulnerabilityTimer_timeout():
-	effects_animation.play("rest")
+	effects_animation.play("playerrest")
 
 

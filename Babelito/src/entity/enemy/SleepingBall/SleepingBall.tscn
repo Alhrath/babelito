@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/entity/enemy/SleepingBall/SleepingBall.gd" type="Script" id=1]
 [ext_resource path="res://src/entity/enemy/SleepingBall/SleepingBallRig.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/entity/player/Hitbox.gd" type="Script" id=3]
+[ext_resource path="res://src/entity/enemy/SleepingBall/SleepingBallSM.gd" type="Script" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 21.1896
@@ -11,12 +12,16 @@ height = 9.97319
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 10.8787, 24.1626 )
 
+[sub_resource type="CircleShape2D" id=3]
+radius = 342.037
+
 [node name="SleepingBall" type="KinematicBody2D"]
 collision_layer = 0
 collision_mask = 3
 script = ExtResource( 1 )
 
 [node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 4 )
 
 [node name="Body" type="Node2D" parent="."]
 
@@ -43,5 +48,26 @@ position = Vector2( -1, 6 )
 shape = SubResource( 2 )
 __meta__ = {
 "_edit_lock_": true
+}
+
+[node name="DetectionArea" type="Area2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource( 3 )
+
+[node name="StateLabel" type="Label" parent="."]
+margin_left = -20.0
+margin_top = -40.0
+margin_right = 20.0
+margin_bottom = -26.0
+text = "XXX"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
 }
 [connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_InvulnerabilityTimer_timeout"]

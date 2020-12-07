@@ -1,10 +1,7 @@
 [gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/entity/player/craby.png" type="Texture" id=1]
-[ext_resource path="res://src/entity/player/playerdamage.tres" type="Animation" id=2]
 [ext_resource path="res://src/entity/player/PlayerRig.gd" type="Script" id=3]
-[ext_resource path="res://src/entity/enemy/SleepingBall/SleepingBallFlash.tres" type="Animation" id=4]
-[ext_resource path="res://src/entity/enemy/SleepingBall/sleepingballrest.tres" type="Animation" id=5]
 
 [sub_resource type="GDScript" id=1]
 
@@ -1239,6 +1236,93 @@ tracks/16/keys = {
 "values": [ Vector2( 11.2638, 0.695968 ), Vector2( 32.3769, 25.3765 ) ]
 }
 
+[sub_resource type="Animation" id=8]
+resource_name = "playerdamage"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.168627, 0.215686, 0.956863, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "playerflash"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "playerrest"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
 [node name="PlayerRig" type="Node2D"]
 script = ExtResource( 3 )
 
@@ -1309,6 +1393,6 @@ anims/run = SubResource( 6 )
 anims/throw = SubResource( 7 )
 
 [node name="EffectsAnimation" type="AnimationPlayer" parent="."]
-anims/damage = ExtResource( 2 )
-anims/flash = ExtResource( 4 )
-anims/rest = ExtResource( 5 )
+anims/playerdamage = SubResource( 8 )
+anims/playerflash = SubResource( 9 )
+anims/playerrest = SubResource( 10 )
