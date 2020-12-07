@@ -8,13 +8,25 @@ func _ready():
 	add_state("fall")
 	add_state("throw_godot")
 	################
+	add_state("wall_slide")
 	add_state("dead")
 	###############3
 	call_deferred("set_state", states.idle) #defining "idle" as default
 
 func _state_logic(delta):
-	parent._handle_move_input()
+###################################
+	parent._update_move_direction()
+	parent._update_wall_direction()
+	
+	if state != states.wall_slide:
+		parent._handle_move_input()
+		
 	parent._apply_gravity(delta)
+	
+	if state == states.wall_slide:
+		parent._cap_gravity_wall_slide()
+		parent._handle_wall_slide_sticking()
+##########################################
 	parent._apply_movement()
 	
 func _input(event): 
@@ -31,8 +43,14 @@ func _input(event):
 			else:
 				parent.velocity.y = Globals.max_jump_velocity
 				parent.is_jumping = true
-
-	if state == states.jump:
+				
+#############################################4444
+	elif state == states.wall_slide:
+		if event.is_action_pressed("jump"):
+			parent.wall_jump()
+			set_state(states.jump)
+#############################################4444
+	elif state == states.jump:
 		if event.is_action_released("jump") && parent.velocity.y < Globals.min_jump_velocity:
 			parent.velocity.y = Globals.min_jump_velocity
 		if event.is_action_pressed("throw"):
@@ -60,13 +78,23 @@ func _get_transition(delta):
 				return states.idle
 		
 		states.jump:
-			if parent.is_on_floor():
+#################################################3333
+			if parent.wall_direction != 0 && parent.wall_slide_cooldown.is_stopped():
+				return states.wall_slide
+
+			elif parent.is_on_floor(): #if
+#################################################3333
 				return states.idle
 			elif parent.velocity.y >= 0:
 				return states.fall
 				
 		states.fall:
-			if parent.is_on_floor():
+###############################################5555
+			if parent.wall_direction != 0 && parent.wall_slide_cooldown.is_stopped():
+				return states.wall_slide
+
+			elif parent.is_on_floor(): #if
+#############################################55555
 				return states.idle
 			elif parent.velocity.y < 0:
 				return states.jump
@@ -86,6 +114,14 @@ func _get_transition(delta):
 				return states.throw_godot
 		states.dead:
 			_physics_process(false)
+		
+################################################66666
+		states.wall_slide:
+			if parent.is_on_floor():
+				return states.idle
+			elif parent.wall_direction == 0:
+				return states.fall
+################################################66666
 
 	return null
 
@@ -108,6 +144,21 @@ func _enter_state(new_state, old_state):
 			parent.velocity = Vector2.ZERO
 			parent.anim_player.play("throw", 0)
 			parent.spawn_godot()
+		
+#########################################
+		states.wall_slide:
+			parent.anim_player.play("wall_slide")
+			parent.body.scale.x = -parent.wall_direction
+			
+##########################################
 
 func _exit_state(old_state, new_state):
-	pass
+	match old_state:
+		states.wall_slide:
+			parent.wall_slide_cooldown.start()
+			
+########################################88888
+func _on_WallSlideStickyTimer_timeout():
+	if state == states.wall_slide:
+		set_state(states.fall)	
+#######################################88888

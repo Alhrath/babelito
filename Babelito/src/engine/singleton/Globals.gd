@@ -11,8 +11,8 @@ export var facing = 0
 
 var velocity = Vector2()
 var move_speed = 5 * UNIT_SIZE
-var gravity #= 1200
-var max_jump_velocity #var jump_velocity = -720
+var gravity 
+var max_jump_velocity 
 var min_jump_velocity 
 var move_direction
 var max_jump_height = 3.25 * UNIT_SIZE
