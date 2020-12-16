@@ -4,6 +4,8 @@ const STOP_THRESHOLD = 32.0
 
 func _ready():
 
+	add_state("dashing")
+	add_state("dodging")
 	add_state("idle")
 	add_state("run")
 	add_state("jump")
@@ -19,7 +21,7 @@ func _state_logic(delta):
 	parent._update_move_direction()
 	parent._update_wall_direction()
 	
-	if [states.idle, states.run, states.jump, states.fall].has(state):
+	if [states.idle, states.run, states.jump, states.fall, states.dodging].has(state): #######without dodging
 		parent._handle_movement()
 		#to set which states can move
 		
@@ -35,7 +37,7 @@ func _state_logic(delta):
 	parent._apply_movement()
 	
 func _input(event): # == which state can do what 
-	if [states.idle, states.run, states.crouch, states.crawl].has(state) && parent.can_stand():
+	if [states.idle, states.run, states.crouch, states.crawl].has(state) && parent.can_stand(): 
 	#for all these states:
 		if event.is_action_pressed("throw"):
 			set_state(states.throw_godot)
@@ -47,7 +49,16 @@ func _input(event): # == which state can do what
 					parent.set_collision_mask_bit(parent.DROP_THRU_BIT, false)
 			else:
 				parent.jump()
-
+	
+		elif event.is_action_pressed("dodge") && parent.dodging_timer.is_stopped():
+			set_state(states.dodging)
+	#####################################################
+#		elif Input.is_action_pressed("down"):
+#			if Input.is_action_pressed("move_left"):
+#				set_state("dashing")
+#			elif Input.is_action_pressed("move_right"):
+#				set_state("dashing")
+	#####################################################
 				
 	elif state == states.wall_slide:
 		if event.is_action_pressed("jump"):
@@ -60,7 +71,7 @@ func _input(event): # == which state can do what
 			
 		if event.is_action_pressed("throw"):
 			set_state(states.throw_godot)
-			
+
 
 func _get_transition(delta):
 	match state:
@@ -74,7 +85,9 @@ func _get_transition(delta):
 				return states.run
 			elif Input.is_action_pressed("down"):
 				return states.crouch
-			
+			elif Input.is_action_pressed("dodge"):
+				return states.dodging
+
 		states.run:
 			if !parent.is_on_floor():
 				if parent.velocity.y < 0:
@@ -85,7 +98,9 @@ func _get_transition(delta):
 				return states.idle
 			elif Input.is_action_pressed("down"):
 				return states.crawl
-				
+			elif Input.is_action_pressed("dodge"):
+				return states.dodging
+
 		states.jump:
 			if parent.wall_direction != 0 && parent.wall_slide_cooldown.is_stopped():
 				return states.wall_slide
@@ -93,7 +108,9 @@ func _get_transition(delta):
 				return states.idle
 			elif parent.velocity.y >= 0:
 				return states.fall
-				
+			elif Input.is_action_pressed("dodge"):
+				return states.dodging
+
 		states.fall:
 			if parent.wall_direction != 0 && parent.wall_slide_cooldown.is_stopped():
 				return states.wall_slide
@@ -101,7 +118,9 @@ func _get_transition(delta):
 				return states.idle
 			elif parent.velocity.y < 0:
 				return states.jump
-				
+			elif Input.is_action_pressed("dodge"):
+				return states.dodging
+
 		states.throw_godot:
 			if parent.held_item == null:
 				if parent.is_on_floor():
@@ -145,7 +164,18 @@ func _get_transition(delta):
 					return states.fall
 			elif abs(parent.velocity.x) < STOP_THRESHOLD:
 				return states.crouch
-				
+
+		states.dodging:
+			if parent.dodging_timer.is_stopped():
+				if !parent.is_on_floor():
+					if parent.velocity.y < 0:
+						return states.jump
+					elif parent.velocity.y > 0:
+						return states.fall
+				elif parent.velocity.x == 0:
+					return states.idle
+				else:
+					return states.run
 	return null
 
 func _enter_state(new_state, old_state):
@@ -176,10 +206,15 @@ func _enter_state(new_state, old_state):
 			parent.anim_player.play("crouch")
 			if old_state != states.crawl:
 				parent._on_crouch()
+				
 		states.crawl:
 			parent.anim_player.play("crawl")
 			if old_state != states.crouch:
 				parent._on_crouch()
+				
+		states.dodging:
+			parent.anim_player.play("dodge")
+			parent.dodging_timer.start()
 		
 func _exit_state(old_state, new_state):
 	match old_state:

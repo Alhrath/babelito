@@ -25,7 +25,7 @@ var move_direction
 
 var held_item = null
 var is_jumping = false #useful to create platform drop through
-var is_grounded = false#to permit a check_ground method associated with raycasts
+var is_grounded = false #to permit a check_ground method associated with raycasts
 var is_wall_sliding = false
 var wall_direction = 1
 
@@ -47,7 +47,7 @@ onready var held_item_position = $Body/PlayerRig/Torso/RightArm/HeldItemPosition
 onready var hitbox = $Hitbox
 onready var invulnerability_timer = $InvulnerabilityTimer
 onready var effects_animation = $Body/PlayerRig/EffectsAnimation
-
+onready var dodging_timer = $DodgingTimer
 
 func _ready():
 	Globals.player = self
@@ -85,7 +85,7 @@ func _apply_movement():
 	if was_grounded == null || is_grounded != was_grounded:
 		emit_signal("grounded_updated", is_grounded)
 	
-func _handle_movement(var move_speed = self.move_speed): ####with in (var move_speed = self.move_speed)
+func _handle_movement(var move_speed = self.move_speed):
 	var move_input_speed = -Input.get_action_strength("move_left") + Input.get_action_strength("move_right")
 	velocity.x = lerp(velocity.x, move_speed * move_input_speed, _get_h_weight())
 	if move_direction != 0:
@@ -167,8 +167,8 @@ func _on_Area2D_body_exited(body):
 	set_collision_mask_bit(DROP_THRU_BIT, true)
 #to let the player pass through == drop-through platform
 func damage(damage_amount):
-#Damage function controlled by invulnerability timer
-	if invulnerability_timer.is_stopped():
+#Damage function controlled by invulnerability timer. Add the condition of dodging_timer --> dodge = no damage
+	if invulnerability_timer.is_stopped() && dodging_timer.is_stopped():
 		invulnerability_timer.start()
 		_set_health(health - damage_amount)
 		effects_animation.play("playerdamage")
@@ -228,3 +228,7 @@ func can_stand() -> bool:
 				results.remove(i)
 	return results.size() == 0
 
+
+
+func _on_DodgingTimer_timeout():
+	pass # Replace with function body.
