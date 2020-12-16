@@ -177,10 +177,6 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="InvulnerabilityTimer" type="Timer" parent="."]
-wait_time = 0.8
-one_shot = true
-
 [node name="StateLabel" type="Label" parent="."]
 anchor_right = 2.0
 margin_left = -40.0
@@ -233,20 +229,37 @@ scale = Vector2( 0.3, 0.3 )
 enabled = true
 cast_to = Vector2( 5, 0 )
 
-[node name="WallSlideCooldown" type="Timer" parent="."]
-wait_time = 0.4
+[node name="Timers" type="Node" parent="."]
+
+[node name="DodgingTimer" type="Timer" parent="Timers"]
+wait_time = 0.6
 one_shot = true
 
-[node name="WallSlideStickyTimer" type="Timer" parent="."]
+[node name="DodgingCooldown" type="Timer" parent="Timers"]
+wait_time = 3.0
+one_shot = true
+
+[node name="WallSlideStickyTimer" type="Timer" parent="Timers"]
 wait_time = 0.2
 one_shot = true
 
-[node name="DodgingTimer" type="Timer" parent="."]
+[node name="WallSlideCooldown" type="Timer" parent="Timers"]
 wait_time = 0.4
+one_shot = true
+
+[node name="InvulnerabilityTimer" type="Timer" parent="Timers"]
+wait_time = 0.8
+one_shot = true
+
+[node name="DashingTimer" type="Timer" parent="Timers"]
+wait_time = 0.4
+one_shot = true
+
+[node name="DashingCooldown" type="Timer" parent="Timers"]
+wait_time = 2.0
 one_shot = true
 [connection signal="grounded_updated" from="." to="Camera2D" method="_on_Player_grounded_updated"]
 [connection signal="throw_item" from="Body/PlayerRig" to="." method="_throw_held_item"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
-[connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_InvulnerabilityTimer_timeout"]
-[connection signal="timeout" from="WallSlideStickyTimer" to="StateMachine" method="_on_WallSlideStickyTimer_timeout"]
-[connection signal="timeout" from="DodgingTimer" to="." method="_on_DodgingTimer_timeout"]
+[connection signal="timeout" from="Timers/WallSlideStickyTimer" to="StateMachine" method="_on_WallSlideStickyTimer_timeout"]
+[connection signal="timeout" from="Timers/InvulnerabilityTimer" to="." method="_on_InvulnerabilityTimer_timeout"]

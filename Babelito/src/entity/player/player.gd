@@ -37,17 +37,21 @@ onready var standing_hitbox = $Hitbox/StandingShape
 onready var crouching_hitbox = $Hitbox/CrouchingShape
 onready var left_wall_raycasts = $WallRaycasts/LeftWallRaycasts
 onready var right_wall_raycasts = $WallRaycasts/RightWallRaycasts
-onready var wall_slide_cooldown = $WallSlideCooldown
-onready var wall_slide_sticky_timer = $WallSlideStickyTimer
+onready var wall_slide_cooldown = $Timers/WallSlideCooldown
+onready var wall_slide_sticky_timer = $Timers/WallSlideStickyTimer
 onready var body = $Body
 onready var drop_thru_raycasts = $DropThruRaycasts
 onready var raycasts = $Raycasts
 onready var anim_player = $Body/PlayerRig/AnimationPlayer
 onready var held_item_position = $Body/PlayerRig/Torso/RightArm/HeldItemPosition
 onready var hitbox = $Hitbox
-onready var invulnerability_timer = $InvulnerabilityTimer
+onready var invulnerability_timer = $Timers/InvulnerabilityTimer
 onready var effects_animation = $Body/PlayerRig/EffectsAnimation
-onready var dodging_timer = $DodgingTimer
+onready var dodging_timer = $Timers/DodgingTimer
+onready var dodging_cooldown = $Timers/DodgingCooldown
+onready var dashing_timer = $Timers/DashingTimer
+onready var dashing_cooldown = $Timers/DashingCooldown
+
 
 func _ready():
 	Globals.player = self
@@ -228,7 +232,3 @@ func can_stand() -> bool:
 				results.remove(i)
 	return results.size() == 0
 
-
-
-func _on_DodgingTimer_timeout():
-	pass # Replace with function body.
