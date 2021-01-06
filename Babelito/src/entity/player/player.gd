@@ -51,8 +51,15 @@ onready var dodging_timer = $Timers/DodgingTimer
 onready var dodging_cooldown = $Timers/DodgingCooldown
 onready var dashing_timer = $Timers/DashingTimer
 onready var dashing_cooldown = $Timers/DashingCooldown
+###########################################################
+var inventory_resource = load("res://src/entity/player/Inventory.gd")
+var inventory = inventory_resource.new()
 
 
+
+
+
+###########################################################
 func _ready():
 	Globals.player = self
 

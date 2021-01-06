@@ -33,7 +33,6 @@ __meta__ = {
 }
 
 [node name="Camera2D" type="Camera2D" parent="."]
-visible = false
 position = Vector2( 0, -48 )
 current = true
 drag_margin_h_enabled = true
