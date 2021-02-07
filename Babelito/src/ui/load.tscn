@@ -1,0 +1,88 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+
+[node name="Main" type="Node"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer"]
+modulate = Color( 0, 0, 0, 1 )
+self_modulate = Color( 0.219608, 0.0117647, 0.0117647, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Save_load_window" type="CenterContainer" parent="CanvasLayer/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -126.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Control/Save_load_window"]
+margin_left = 512.0
+margin_top = 237.0
+margin_right = 512.0
+margin_bottom = 237.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/Save_load_window/Panel"]
+margin_left = -511.0
+margin_top = -170.0
+margin_right = 510.0
+margin_bottom = 254.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/Save_load_window/Panel/VBoxContainer"]
+margin_top = 205.0
+margin_right = 1021.0
+margin_bottom = 219.0
+uppercase = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/Save_load_window/Panel"]
+margin_left = -442.0
+margin_top = 260.0
+margin_right = 422.0
+margin_bottom = 360.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="New_button" type="Button" parent="CanvasLayer/Control/Save_load_window/Panel/HBoxContainer"]
+margin_left = 200.0
+margin_right = 300.0
+margin_bottom = 100.0
+text = "New Game"
+
+[node name="Save_button" type="Button" parent="CanvasLayer/Control/Save_load_window/Panel/HBoxContainer"]
+margin_left = 353.0
+margin_right = 436.0
+margin_bottom = 100.0
+text = "Save Game"
+
+[node name="Load_button" type="Button" parent="CanvasLayer/Control/Save_load_window/Panel/HBoxContainer"]
+margin_left = 500.0
+margin_right = 550.0
+margin_bottom = 100.0
+text = "Load game"
+
+[node name="Exit_button" type="Button" parent="CanvasLayer/Control/Save_load_window/Panel/HBoxContainer"]
+margin_left = 600.0
+margin_right = 700.0
+margin_bottom = 100.0
+text = "Exit Mofo"
