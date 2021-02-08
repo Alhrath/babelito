@@ -709,7 +709,7 @@ tracks/28/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=4]
 resource_name = "dash"
 length = 0.6
 tracks/0/type = "value"
@@ -1109,8 +1109,7 @@ tracks/32/keys = {
 "values": [ 0.0, -90.0, -90.0 ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "dodge"
+[sub_resource type="Animation" id=5]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Torso:position")
@@ -1533,7 +1532,7 @@ tracks/34/keys = {
 "values": [ 1.0 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Torso:position")
@@ -1824,7 +1823,7 @@ tracks/23/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=7]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Torso:frame")
@@ -2139,7 +2138,7 @@ tracks/25/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=8]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Torso/RightArm:position")
 tracks/0/interp = 1
@@ -2405,7 +2404,7 @@ tracks/21/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=9]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Torso/RightArm:position")
@@ -2660,7 +2659,7 @@ tracks/20/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=10]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Torso/Head:scale")
 tracks/0/interp = 1
@@ -2952,7 +2951,7 @@ tracks/23/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=11]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Torso:position")
@@ -3243,7 +3242,7 @@ tracks/23/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=12]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -3271,7 +3270,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 0.168627, 0.215686, 0.956863, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=13]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -3299,7 +3298,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=14]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -3328,18 +3327,18 @@ tracks/1/keys = {
 }
 
 [node name="PlayerRig" type="Node2D"]
-rotation = -1.5708
 script = ExtResource( 3 )
 
 [node name="Torso" type="Sprite" parent="."]
-position = Vector2( -12, 0 )
+position = Vector2( 0, 1.76777 )
+rotation = 0.785398
 texture = ExtResource( 1 )
 vframes = 2
 hframes = 2
 
 [node name="Head" type="Sprite" parent="Torso"]
-position = Vector2( 11.6799, -18.0203 )
-rotation = 0.523599
+position = Vector2( 7.21616, -24.3842 )
+rotation = -1.0472
 texture = ExtResource( 1 )
 flip_h = true
 vframes = 2
@@ -3347,8 +3346,8 @@ hframes = 2
 frame = 1
 
 [node name="LeftArm" type="Sprite" parent="Torso"]
-position = Vector2( 20.8568, 4.17138 )
-rotation = -0.698132
+position = Vector2( 19.3025, -19.5904 )
+rotation = -2.0944
 scale = Vector2( 0.7, 0.7 )
 z_index = -1
 texture = ExtResource( 1 )
@@ -3357,11 +3356,12 @@ hframes = 2
 frame = 3
 
 [node name="RightArm" type="Sprite" parent="Torso"]
-position = Vector2( -7.00791, -26.3631 )
+position = Vector2( -20.0226, 5.00564 )
+rotation = 0.785398
 scale = Vector2( 0.7, 0.7 )
 z_index = 1
 texture = ExtResource( 1 )
-flip_v = true
+flip_h = true
 vframes = 2
 hframes = 2
 frame = 3
@@ -3372,8 +3372,8 @@ position = Vector2( 11.2638, 0.695968 )
 script = SubResource( 1 )
 
 [node name="LeftLeg" type="Sprite" parent="Torso"]
-position = Vector2( 9.01014, 23.026 )
-rotation = -0.349066
+position = Vector2( 23.6467, 7.82968 )
+rotation = -1.0472
 scale = Vector2( 0.7, 0.7 )
 z_index = -1
 texture = ExtResource( 1 )
@@ -3383,8 +3383,8 @@ hframes = 2
 frame = 2
 
 [node name="RightLeg" type="Sprite" parent="Torso"]
-position = Vector2( -6.34054, 30.7013 )
-rotation = -0.349066
+position = Vector2( 8.24876, 25.7971 )
+rotation = -1.0472
 scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 1 )
 vframes = 2
@@ -3394,16 +3394,16 @@ frame = 2
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/crawl = SubResource( 2 )
 anims/crouch = SubResource( 3 )
-anims/dash = SubResource( 14 )
-anims/dodge = SubResource( 4 )
-anims/fall = SubResource( 5 )
-anims/idle = SubResource( 6 )
-anims/jump = SubResource( 7 )
-anims/run = SubResource( 8 )
-anims/throw = SubResource( 9 )
-anims/wall_slide = SubResource( 10 )
+anims/dash = SubResource( 4 )
+anims/dodge = SubResource( 5 )
+anims/fall = SubResource( 6 )
+anims/idle = SubResource( 7 )
+anims/jump = SubResource( 8 )
+anims/run = SubResource( 9 )
+anims/throw = SubResource( 10 )
+anims/wall_slide = SubResource( 11 )
 
 [node name="EffectsAnimation" type="AnimationPlayer" parent="."]
-anims/playerdamage = SubResource( 11 )
-anims/playerflash = SubResource( 12 )
-anims/playerrest = SubResource( 13 )
+anims/playerdamage = SubResource( 12 )
+anims/playerflash = SubResource( 13 )
+anims/playerrest = SubResource( 14 )

@@ -1,0 +1,17 @@
+{
+  "GodotArmorLight": {
+    "ArmorType": "ArmorLight",
+    "ArmorElement": "Neutral",
+    "ArmorElementResistance": 0
+  },
+  "GodotArmorMedium": {
+    "ArmorType": "ArmorMedium",
+    "ArmorElement": "Neutral",
+    "ArmorElementResistance": 0
+  },
+  "GodotArmorHeavy": {
+    "ArmorType": "ArmorHeavy",
+    "ArmorElement": "Neutral",
+    "ArmorElementResistance": 0
+  }
+}

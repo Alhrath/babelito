@@ -23,7 +23,7 @@ func launch(_direction):#with (direction)
 	scene.add_child(self)
 	global_transform = temp
 	
-	velocity = Vector2(THROW_VELOCITY.x * Globals.playerfacing, THROW_VELOCITY.y)
+	velocity = Vector2(THROW_VELOCITY.x * Globals.playerfacing, THROW_VELOCITY.y) 
 	
 	#velocity = Vector2(THROW_VELOCITY.x * Globals.facing, THROW_VELOCITY.y)
 	#velocity = THROW_VELOCITY * Vector2(direction, 1)

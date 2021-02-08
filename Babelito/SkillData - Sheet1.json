@@ -1,0 +1,72 @@
+{
+  "ThrowGodot": {
+    "SkillType": "Throw",
+    "SkillElement": "Neutral",
+    "SkillDamage": 10,
+    "SkillProjectileSpeed": 250,
+    "SkillRadius": "N/A",
+    "SkillCooldown": 3,
+    "SkillDamageDelay": "N/A",
+    "SkillRemoveDelayTime": "N/A"
+  },
+  "MeleeGodot": {
+    "SkillType": "MeleeLight",
+    "SkillElement": "Neutral",
+    "SkillDamage": 5,
+    "SkillProjectileSpeed": "N/A",
+    "SkillRadius": "N/A",
+    "SkillCooldown": 3,
+    "SkillDamageDelay": "N/A",
+    "SkillRemoveDelayTime": "N/A"
+  },
+  "MeleeGodot2": {
+    "SkillType": "MeleeMedium",
+    "SkillElement": "Neutral",
+    "SkillDamage": 8,
+    "SkillProjectileSpeed": "N/A",
+    "SkillRadius": "N/A",
+    "SkillCooldown": 3,
+    "SkillDamageDelay": "N/A",
+    "SkillRemoveDelayTime": "N/A"
+  },
+  "MeleeGodot3": {
+    "SkillType": "MeleeHeavy",
+    "SkillElement": "Neutral",
+    "SkillDamage": 12,
+    "SkillProjectileSpeed": "N/A",
+    "SkillRadius": "N/A",
+    "SkillCooldown": 3,
+    "SkillDamageDelay": "N/A",
+    "SkillRemoveDelayTime": "N/A"
+  },
+  "MeleeGodot4": {
+    "SkillType": "MeleeBigRange",
+    "SkillElement": "Neutral",
+    "SkillDamage": 7,
+    "SkillProjectileSpeed": "N/A",
+    "SkillRadius": "N/A",
+    "SkillCooldown": 3,
+    "SkillDamageDelay": "N/A",
+    "SkillRemoveDelayTime": "N/A"
+  },
+  "DefenseGodot": {
+    "SkillType": "MeleeDefense",
+    "SkillElement": "Neutral",
+    "SkillDamage": 0,
+    "SkillProjectileSpeed": "N/A",
+    "SkillRadius": "N/A",
+    "SkillCooldown": 3,
+    "SkillDamageDelay": "N/A",
+    "SkillRemoveDelayTime": "N/A"
+  },
+  "RangedGodot": {
+    "SkillType": "Range",
+    "SkillElement": "Neutral",
+    "SkillDamage": 10,
+    "SkillProjectileSpeed": 250,
+    "SkillRadius": "N/A",
+    "SkillCooldown": 3,
+    "SkillDamageDelay": "N/A",
+    "SkillRemoveDelayTime": "N/A"
+  }
+}
