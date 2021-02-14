@@ -10,7 +10,8 @@ func _ready():
 	add_state("run")
 	add_state("jump")
 	add_state("fall")
-	add_state("throw_godot")
+	add_state("skill1")
+	add_state("skill2")
 	add_state("wall_slide")
 	add_state("dead")
 	add_state("crouch")
@@ -43,8 +44,10 @@ func _state_logic(delta):
 func _input(event): # == which state can do what 
 	if [states.idle, states.run, states.crouch, states.crawl, states.dashing].has(state) && parent.can_stand(): 
 	#for all these states:
-		if event.is_action_pressed("throw"):
-			set_state(states.throw_godot)
+		if event.is_action_pressed("skill1"):
+			set_state(states.skill1)
+		elif event.is_action_pressed("skill2"):
+			set_state(states.skill2)
 			
 		elif event.is_action_pressed("jump"): 
 			##add dashing to prevent going through platform while dashing
@@ -73,9 +76,10 @@ func _input(event): # == which state can do what
 		if event.is_action_released("jump"):
 			parent.variable_jump()#variation in jump intensity
 			
-		if event.is_action_pressed("throw"):
-			set_state(states.throw_godot)
-
+		if event.is_action_pressed("skill1"):
+			set_state(states.skill1)
+		if event.is_action_pressed("skill2"):
+			set_state(states.skill2)
 
 func _get_transition(delta):
 	match state:
@@ -125,7 +129,7 @@ func _get_transition(delta):
 			elif Input.is_action_pressed("dodge") && parent.dodging_cooldown.is_stopped():
 				return states.dodging
 
-		states.throw_godot:
+		states.skill1:
 			if parent.held_item == null:
 				if parent.is_on_floor():
 					if parent.velocity.x != 0:
@@ -137,7 +141,22 @@ func _get_transition(delta):
 				else: 
 					return states.fall
 			else:
-				return states.throw_godot
+				return states.skill1
+				
+		states.skill2:
+			if parent.held_item == null:
+				if parent.is_on_floor():
+					if parent.velocity.x != 0:
+						return states.run
+					else:
+						return states.idle
+				elif parent.velocity.y < 0:
+					return states.jump
+				else: 
+					return states.fall
+			else:
+				return states.skill2
+				
 		states.dead:
 			_physics_process(false)
 		
@@ -209,10 +228,15 @@ func _enter_state(new_state, old_state):
 		states.fall:
 			parent.anim_player.play("fall")
 			
-		states.throw_godot:
+		states.skill1:
 			parent.velocity = Vector2.ZERO
 			parent.anim_player.play("throw", 0)
 			parent.spawn_godot()
+		
+		states.skill2:
+			parent.velocity = Vector2(parent.velocity.x * 0.9, parent.velocity.y)
+			parent.anim_player.play("regularsword", 0)
+			parent.spawn_skill2()
 		
 		states.wall_slide:
 			parent.anim_player.play("wall_slide")

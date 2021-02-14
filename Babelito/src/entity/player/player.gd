@@ -6,6 +6,7 @@ signal health_updated(health)
 signal killed()
 
 const GodotProjectile_PS = preload("res://src/entity/weapons/GodotProjectile.tscn")
+const RegularSword_PS = preload("res://src/entity/weapons/RegularSword.tscn")
 const CRAWL_SPEED = 32 * 5 #=speed when crawling
 const SLOPE_STOP_THRESHOLD = 64 #get better slope movements
 const DROP_THRU_BIT = 1 # collision variable for dropping through platform
@@ -162,10 +163,17 @@ func spawn_godot():
 		held_item = GodotProjectile_PS.instance()
 		held_item_position.add_child(held_item)
 		
+func spawn_skill2():
+#Function to spawn items to throw
+	if held_item == null:
+		held_item = RegularSword_PS.instance()
+		held_item_position.add_child(held_item)
+		
 func _throw_held_item():
 #Function to throw spawned items
 	held_item.launch(Globals.playerfacing)
 	held_item = null
+
 
 func _on_Area2D_body_exited(body):
 	set_collision_mask_bit(DROP_THRU_BIT, true)
