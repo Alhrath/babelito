@@ -10,8 +10,12 @@ func _ready():
 	add_state("run")
 	add_state("jump")
 	add_state("fall")
-	add_state("skill1")
-	add_state("skill2")
+	add_state("skill1") 
+	
+	add_state("skill2idle")
+	add_state("skill2crouch")
+	add_state("skill2jump")
+	
 	add_state("wall_slide")
 	add_state("dead")
 	add_state("crouch")
@@ -44,17 +48,28 @@ func _state_logic(delta):
 func _input(event): # == which state can do what 
 	if [states.idle, states.run, states.crouch, states.crawl, states.dashing].has(state) && parent.can_stand(): 
 	#for all these states:
-		if event.is_action_pressed("skill1"):
+		##########
+		if [states.crawl, states.crouch].has(state):
+			if event.is_action_pressed("skill2"):
+				set_state(states.skill2crouch)	
+		########
+		elif event.is_action_pressed("skill1"):
 			set_state(states.skill1)
+			#######
 		elif event.is_action_pressed("skill2"):
-			set_state(states.skill2)
-			
+			set_state(states.skill2idle)
+			######
 		elif event.is_action_pressed("jump"): 
 			##add dashing to prevent going through platform while dashing
 			if Input.is_action_pressed("down") && ![states.dashing].has(state): 
 			#when jump + down are pressed ==> drop through platform
 				if parent._check_is_grounded(parent.drop_thru_raycasts):
 					parent.set_collision_mask_bit(parent.DROP_THRU_BIT, false)
+					
+				########
+			elif event.is_action_pressed("skill2"):
+				set_state(states.skill2jump)
+				########
 			else:
 				parent.jump()
 
@@ -78,10 +93,11 @@ func _input(event): # == which state can do what
 			
 		if event.is_action_pressed("skill1"):
 			set_state(states.skill1)
+			########
 		if event.is_action_pressed("skill2"):
-			set_state(states.skill2)
-
-func _get_transition(delta):
+			set_state(states.skill2jump)
+			#########
+func _get_transition(_delta):
 	match state:
 		states.idle:
 			if !parent.is_on_floor():
@@ -142,8 +158,9 @@ func _get_transition(delta):
 					return states.fall
 			else:
 				return states.skill1
-				
-		states.skill2:
+
+################################
+		states.skill2jump:
 			if parent.held_item == null:
 				if parent.is_on_floor():
 					if parent.velocity.x != 0:
@@ -155,8 +172,36 @@ func _get_transition(delta):
 				else: 
 					return states.fall
 			else:
-				return states.skill2
+				return states.skill2jump
 				
+		states.skill2idle:
+			if parent.held_item == null:
+				if parent.is_on_floor():
+					if parent.velocity.x != 0:
+						return states.run
+					else:
+						return states.idle
+				elif parent.velocity.y < 0:
+					return states.jump
+				else: 
+					return states.fall
+			else:
+				return states.skill2idle
+		states.skill2crouch:
+			if parent.held_item == null:
+				if parent.is_on_floor():
+					if parent.velocity.x != 0:
+						return states.run
+					else:
+						return states.idle
+				elif parent.velocity.y < 0:
+					return states.jump
+				else: 
+					return states.fall
+			else:
+				return states.skill2crouch
+				
+	#######################
 		states.dead:
 			_physics_process(false)
 		
@@ -232,11 +277,22 @@ func _enter_state(new_state, old_state):
 			parent.velocity = Vector2.ZERO
 			parent.anim_player.play("throw", 0)
 			parent.spawn_godot()
-		
-		states.skill2:
-			parent.velocity = Vector2(parent.velocity.x * 0.9, parent.velocity.y)
-			parent.anim_player.play("regularsword", 0)
+		##############
+		states.skill2jump:
+			parent.velocity = Vector2(parent.velocity.x * 1.01, parent.velocity.y)
+			parent.anim_player.play("regularswordjump", 0)
 			parent.spawn_skill2()
+		
+		states.skill2idle:
+			parent.velocity = Vector2(parent.velocity.x * 0.92, parent.velocity.y)
+			parent.anim_player.play("regularswordidle", 0)
+			parent.spawn_skill2()
+		
+		states.skill2crouch:
+			parent.velocity = Vector2(parent.velocity.x * 0.9, parent.velocity.y)
+			parent.anim_player.play("regularswordcrouch", 0)
+			parent.spawn_skill2()
+		##############
 		
 		states.wall_slide:
 			parent.anim_player.play("wall_slide")

@@ -6,7 +6,7 @@ export (float) var damage_amount = 25
 
 var exceptions = []
 
-func add_exceptions(node:Node):
+func add_exceptions(_node:Node):
 	exceptions.append("../Player")
 	
 func remove_exception(node:Node):

@@ -11,7 +11,7 @@ const SHIFT_DURATION = 1
 onready var prev_camera_pos = get_camera_position()
 onready var tween = $ShiftTween
 
-func _process(delta):
+func _process(_delta):
 	_check_facing() #determine if the camera is front of the player or not
 	prev_camera_pos = get_camera_position()
 	
@@ -29,5 +29,5 @@ func _on_Player_grounded_updated(is_grounded):
 
 
 
-func _on_Area2D_body_exited(body):
+func _on_Area2D_body_exited(_body):
 	pass # Replace with function body.

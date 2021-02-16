@@ -17,6 +17,7 @@ func _physics_process(delta):
 		_on_impact(collision.normal)
 
 func launch(_direction):#with (direction)
+	
 	var temp = global_transform
 	var scene = get_tree().current_scene
 	get_parent().remove_child(self)

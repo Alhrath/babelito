@@ -43,7 +43,7 @@ onready var wall_slide_sticky_timer = $Timers/WallSlideStickyTimer
 onready var body = $Body
 onready var drop_thru_raycasts = $DropThruRaycasts
 onready var raycasts = $Raycasts
-onready var anim_player = $Body/PlayerRig/AnimationPlayer
+onready var anim_player = $Body/PlayerRig/AnimationPlayer 
 onready var held_item_position = $Body/PlayerRig/Torso/RightArm/HeldItemPosition
 onready var hitbox = $Hitbox
 onready var invulnerability_timer = $Timers/InvulnerabilityTimer
@@ -119,7 +119,7 @@ func _get_h_weight():
 		else:
 			return 0.1
 
-func _check_is_grounded(raycasts = self.raycasts):
+func _check_is_grounded(raycasts = self.raycasts): 
 	for raycast in raycasts.get_children():
 		if raycast.is_colliding():
 			return true	
@@ -175,7 +175,7 @@ func _throw_held_item():
 	held_item = null
 
 
-func _on_Area2D_body_exited(body):
+func _on_Area2D_body_exited(_body):
 	set_collision_mask_bit(DROP_THRU_BIT, true)
 #to let the player pass through == drop-through platform
 func damage(damage_amount):

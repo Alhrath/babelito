@@ -21,7 +21,7 @@ func _state_logic(delta):
 
 	parent._apply_velocity()
 	
-func _get_transition(delta):
+func _get_transition(_delta):
 	match state:
 		states.sleep:
 			if parent._should_chase():
@@ -39,9 +39,9 @@ func _get_transition(delta):
 	
 	return null
 
-func _enter_state(new_state, old_state):
-	parent.get_node("StateLabel").text = states.keys()[new_state].capitalize()
-	match new_state:
+func _enter_state(_new_state, _old_state):
+	parent.get_node("StateLabel").text = states.keys()[_new_state].capitalize()
+	match _new_state:
 		states.sleep:
 			parent.anim_sb.play("rest")
 		states.chase:
@@ -50,11 +50,11 @@ func _enter_state(new_state, old_state):
 			parent.anim_sb.play("attack")
 			parent.attack()
 
-func _exit_state(old_state, new_state):
+func _exit_state(_old_state, _new_state):
 	pass
 ##########################################
-func _on_DetectionArea_area_entered(area):
+func _on_DetectionArea_area_entered(_area):
 	parent._physics_process(true) # Replace with function body.
 
-func _on_DetectionArea_area_exited(area):
+func _on_DetectionArea_area_exited(_area):
 	parent._physics_process(false)
