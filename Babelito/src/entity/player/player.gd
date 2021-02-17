@@ -55,6 +55,7 @@ onready var dashing_cooldown = $Timers/DashingCooldown
 
 func _ready():
 	Globals.player = self
+	
 
 func _apply_gravity(delta):
 	velocity.y += Globals.gravity * delta

@@ -19,8 +19,11 @@ var max_jump_height = 3.25 * UNIT_SIZE
 var min_jump_height = 0.05 * UNIT_SIZE
 var jump_duration = 0.45
 
+
 func _ready():
+	
 	gravity = 2 * max_jump_height / pow(jump_duration, 2)
 	max_jump_velocity = -sqrt(2 * gravity * max_jump_height)
 	min_jump_velocity = -sqrt(2 * gravity * min_jump_height)
+	
 
