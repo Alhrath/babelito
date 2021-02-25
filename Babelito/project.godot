@@ -35,6 +35,11 @@ config/icon="res://icon.png"
 Globals="*res://src/engine/singleton/Globals.gd"
 DataImport="*res://src/engine/singleton/DataImport.gd"
 
+[display]
+
+window/size/width=1280
+window/size/height=720
+
 [input]
 
 move_left={
