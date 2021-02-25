@@ -1,20 +1,26 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://src/ui/load.gd" type="Script" id=2]
 
-[node name="Main" type="Node"]
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer"]
-modulate = Color( 0, 0, 0, 1 )
-self_modulate = Color( 0.219608, 0.0117647, 0.0117647, 1 )
+[node name="Save_load" type="Control"]
+pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 1 )
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0901961, 0.0392157, 0.972549, 0.219608 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 anchor_right = 1.0
@@ -39,50 +45,73 @@ margin_bottom = 237.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/Save_load_window/Panel"]
 margin_left = -511.0
-margin_top = -170.0
+margin_top = -170.125
 margin_right = 510.0
-margin_bottom = 254.0
+margin_bottom = 253.875
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="CanvasLayer/Control/Save_load_window/Panel/VBoxContainer"]
-margin_top = 205.0
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Control/Save_load_window/Panel/VBoxContainer"]
+margin_top = 212.0
 margin_right = 1021.0
-margin_bottom = 219.0
+margin_bottom = 212.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Control/Save_load_window/Panel/VBoxContainer/CenterContainer"]
+margin_left = 510.0
+margin_right = 510.0
+texture = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/Save_load_window/Panel/VBoxContainer/CenterContainer/NinePatchRect"]
+margin_left = -510.0
+margin_top = 4.0
+margin_right = 511.0
+margin_bottom = 18.0
+align = 1
+valign = 1
 uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/Save_load_window/Panel"]
 margin_left = -442.0
 margin_top = 260.0
 margin_right = 422.0
 margin_bottom = 360.0
+custom_constants/separation = 100
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="New_button" type="Button" parent="CanvasLayer/Control/Save_load_window/Panel/HBoxContainer"]
-margin_left = 200.0
-margin_right = 300.0
+visible = false
+margin_left = 305.0
+margin_right = 387.0
 margin_bottom = 100.0
 text = "New Game"
 
 [node name="Save_button" type="Button" parent="CanvasLayer/Control/Save_load_window/Panel/HBoxContainer"]
-margin_left = 353.0
-margin_right = 436.0
+visible = false
+margin_left = 396.0
+margin_right = 479.0
 margin_bottom = 100.0
 text = "Save Game"
 
 [node name="Load_button" type="Button" parent="CanvasLayer/Control/Save_load_window/Panel/HBoxContainer"]
-margin_left = 500.0
-margin_right = 550.0
+visible = false
+margin_left = 488.0
+margin_right = 569.0
 margin_bottom = 100.0
 text = "Load game"
 
 [node name="Exit_button" type="Button" parent="CanvasLayer/Control/Save_load_window/Panel/HBoxContainer"]
-margin_left = 600.0
-margin_right = 700.0
+visible = false
+margin_left = 396.0
+margin_right = 467.0
 margin_bottom = 100.0
 text = "Exit Mofo"
+[connection signal="pressed" from="CanvasLayer/Control/Save_load_window/Panel/HBoxContainer/Save_button" to="." method="_on_Save_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/Save_load_window/Panel/HBoxContainer/Load_button" to="." method="_on_Load_button_pressed"]
