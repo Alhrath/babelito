@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/nature-paltformer-tileset-16x16.png-a368a9c9e213e05ad5a4df3855ecc8f3.stex"
+path="res://.import/bigsword.png-9fe0c461f7f253cee81070eff2fc0928.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/tile/nature/nature-paltformer-tileset-16x16.png"
-dest_files=[ "res://.import/nature-paltformer-tileset-16x16.png-a368a9c9e213e05ad5a4df3855ecc8f3.stex" ]
+source_file="res://src/entity/enemy/Nastia/bigsword.png"
+dest_files=[ "res://.import/bigsword.png-9fe0c461f7f253cee81070eff2fc0928.stex" ]
 
 [params]
 

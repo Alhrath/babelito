@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/nature-paltformer-tileset-16x16.png-a368a9c9e213e05ad5a4df3855ecc8f3.stex"
+path="res://.import/craby.png-afcfb96d66d21d9cb72516d938d90e87.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/tile/nature/nature-paltformer-tileset-16x16.png"
-dest_files=[ "res://.import/nature-paltformer-tileset-16x16.png-a368a9c9e213e05ad5a4df3855ecc8f3.stex" ]
+source_file="res://src/entity/player/craby.png"
+dest_files=[ "res://.import/craby.png-afcfb96d66d21d9cb72516d938d90e87.stex" ]
 
 [params]
 
